@@ -2,11 +2,10 @@ package io.github.leiv.produtoapi.controller;
 
 import io.github.leiv.produtoapi.model.Produto;
 import io.github.leiv.produtoapi.repository.ProdutoRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -28,5 +27,11 @@ public class ProdutoController {
 
         produtoRepository.save(produto);
         return produto;
+    }
+
+    @GetMapping("/{id}")
+    public Produto oberPorId(@PathVariable("id") String id) {
+
+        return produtoRepository.findById(id).orElse(null);
     }
 }
